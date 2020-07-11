@@ -1,30 +1,27 @@
-var expression = ['','',''];
-var displaynum1 = Number(expression[0]);
-var displayop = expression[1];
-var displaynum2 = Number(expression[2]);
-var currentop = 0;
- const numclick = document.querySelectorAll("#numbutton");
- numclick.forEach(button => button.addEventListener('click', popDisplay));
- const opclick = document.querySelectorAll("#opbutton");
- opclick.forEach(button => button.addEventListener('click', popOperator));
- const eqclick = document.querySelector("#calcresult");
- eqclick.addEventListener('click',operate);
+var firstnum= "";
+var currnum="";
+var operation = "";
+const expresult = document.querySelector('#calculator-evaluated-display');
+const optodisplay = document.querySelector('#calculator-input-display')
+const numclick = document.querySelectorAll("#numbutton");
+numclick.forEach(button => button.addEventListener('click', popDisplay));
+const opclick = document.querySelectorAll("#opbutton");
+opclick.forEach(button => button.addEventListener('click', popOperator));
+const eqclick = document.querySelector("#calcresult");
+eqclick.addEventListener('click',operate);
 
  function popOperator(e){
-    const optodisplay = document.querySelector('#calculator-input-display')
     const opval = e.path[0].value;
-    currentop++;
-    expression[currentop] += opval;
-    let str = expression.join('');
-    optodisplay.innerHTML = '<span>'+str+'</span>';
-    currentop++;
+    operation = opval;
+    firstnum = currnum;
+    currnum = "";
+    expresult.innerHTML = '<span>'+firstnum+operation+'</span>';
+    optodisplay.innerHTML = '<span>'+currnum+'</span>';
  }
  function popDisplay(e){
-    const numtodisplay = document.querySelector('#calculator-input-display')
     const numval = e.path[0].value;
-    expression[currentop] +=numval;
-    let str = expression.join('');
-    numtodisplay.innerHTML = '<span>'+str+'</span>';
+    currnum += numval;
+    optodisplay.innerHTML = '<span>'+currnum+'</span>';
 }
 function add(num1,num2){
     return num1 + num2;
@@ -41,25 +38,32 @@ function divide(num1,num2){
 }
 
 function operate() {
-    const expresult = document.querySelector('#calculator-evaluated-display')
-    const num1 = Number(expression[0]);
-    const num2 = Number(expression[2]);
-    const operator = expression[1];
-    if (operator == "+") {
+    const num1 = Number(firstnum);
+    const num2 = Number(currnum);
+    
+    if (operation == "+") {
       const sum = add(num1,num2);
-      expresult.innerHTML = '<span>'+sum+'</span>';
+      currnum = sum;
+      optodisplay.innerHTML = '<span>'+sum+'</span>';
+      expresult.innerText = "";
     }
-    else if (operator == "-") {
+    else if (operation == "-") {
         const sum = subtract(num1,num2);
-        expresult.innerHTML = '<span>'+sum+'</span>';
+        currnum = sum;
+        optodisplay.innerHTML = '<span>'+sum+'</span>';
+        expresult.innerText = "";
     }
-    else if (operator == "*") {
+    else if (operation == "*") {
         const sum = multiply(num1,num2);
-        expresult.innerHTML = '<span>'+sum+'</span>';
+        currnum = sum;
+        optodisplay.innerHTML = '<span>'+sum+'</span>';
+        expresult.innerText = "";
     }
-    else if (operator == "/") {
+    else if (operation == "/") {
         const sum = divide(num1,num2);
-        expresult.innerHTML = '<span>'+sum+'</span>';
+        currnum = sum;
+        optodisplay.innerHTML = '<span>'+sum+'</span>';
+        expresult.innerText = "";
     }
 }
 
