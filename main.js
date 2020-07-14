@@ -9,20 +9,46 @@ const opclick = document.querySelectorAll("#opbutton");
 opclick.forEach(button => button.addEventListener('click', popOperator));
 const eqclick = document.querySelector("#calcresult");
 eqclick.addEventListener('click',operate);
+const dele = document.querySelector("#delbutton");
+dele.addEventListener('click',del);
+const cbut = document.querySelector("#CButton");
+cbut.addEventListener('click',clear);
 
  function popOperator(e){
+    if(optodisplay.innerText === ""){return;}
     const opval = e.path[0].value;
-    operation = opval;
+    if(firstnum !=="" && currnum !=="" && operation !==""){
+        operate();
+        firstnum = optodisplay.innerText;
+    }
+    else{
     firstnum = currnum;
+    }
+    operation = opval;
     currnum = "";
     expresult.innerHTML = '<span>'+firstnum+operation+'</span>';
     optodisplay.innerHTML = '<span>'+currnum+'</span>';
  }
+
  function popDisplay(e){
     const numval = e.path[0].value;
     currnum += numval;
     optodisplay.innerHTML = '<span>'+currnum+'</span>';
 }
+
+function clear(){
+    optodisplay.innerText="";
+    expresult.innerText = "";
+    firstnum =  "";
+    currnum = "";
+    operation = "";
+}
+
+function del(){
+    optodisplay.innerText = optodisplay.innerText.slice(0, -1);
+    currnum = optodisplay.innerText;
+}
+
 function add(num1,num2){
     return num1 + num2;
 }
