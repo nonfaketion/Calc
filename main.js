@@ -26,14 +26,14 @@ cbut.addEventListener('click',clear);
     }
     operation = opval;
     currnum = "";
-    expresult.innerHTML = '<span>'+firstnum+operation+'</span>';
-    optodisplay.innerHTML = '<span>'+currnum+'</span>';
+    expresult.innerHTML = firstnum+operation;
+    optodisplay.innerHTML = currnum;
  }
 
  function popDisplay(e){
     const numval = e.path[0].value;
     currnum += numval;
-    optodisplay.innerHTML = '<span>'+currnum+'</span>';
+    optodisplay.innerHTML = currnum;
 }
 
 function clear(){
@@ -70,25 +70,25 @@ function operate() {
     if (operation == "+") {
       const sum = add(num1,num2);
       currnum = sum;
-      optodisplay.innerHTML = '<span>'+sum+'</span>';
+      optodisplay.innerHTML = sum;
       expresult.innerText = "";
     }
     else if (operation == "-") {
         const sum = subtract(num1,num2);
         currnum = sum;
-        optodisplay.innerHTML = '<span>'+sum+'</span>';
+        optodisplay.innerHTML = sum;
         expresult.innerText = "";
     }
     else if (operation == "*") {
         const sum = multiply(num1,num2);
         currnum = sum;
-        optodisplay.innerHTML = '<span>'+sum+'</span>';
+        optodisplay.innerHTML = sum;
         expresult.innerText = "";
     }
     else if (operation == "/") {
         const sum = divide(num1,num2);
         currnum = sum;
-        optodisplay.innerHTML = '<span>'+sum+'</span>';
+        optodisplay.innerHTML = sum;
         expresult.innerText = "";
     }
 }
